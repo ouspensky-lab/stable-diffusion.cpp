@@ -16,7 +16,7 @@ jobs:
       - name: Check out pinned source
         uses: actions/checkout@v6
         with:
-          ref: d697a0a230bc3e08cc86f3d0c896aa0a1619baa9
+          ref: 19bdfe22d255d5b4dff39d449318b9bc5ea2317f
           submodules: recursive
 
       - name: Set up Node
@@ -56,10 +56,10 @@ jobs:
             -DCMAKE_CXX_FLAGS=/bigobj `
             -DSD_VULKAN=ON `
             -DGGML_NATIVE=OFF `
-            -DGGML_CPU_ALL_VARIANTS=ON `
-            -DSD_BUILD_SHARED_LIBS=ON `
-            -DSD_BUILD_SHARED_GGML_LIB=ON `
-            -DGGML_BACKEND_DL=ON
+            -DGGML_AVX=OFF `
+            -DGGML_AVX2=OFF `
+            -DGGML_FMA=OFF `
+            -DSD_BUILD_SHARED_LIBS=ON
           if ($LASTEXITCODE -ne 0) { throw "CMake configuration failed" }
 
           cmake --build build --config Release --parallel 2
